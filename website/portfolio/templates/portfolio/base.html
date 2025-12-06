@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+{% load static%}
+<html lang="en">
+<style>
+    html {
+        scroll-padding-top: 80px;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        color: #fff;
+        padding-top: 80px;
+        background-image: url("{{ bg_image.background.url }}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+
+    }
+
+    .navbar {
+        padding-top: 0.1rem;
+        padding-bottom: 0.1rem;
+        background-color: rgba(0, 0, 0, 0.3);
+        box-shadow: 0 6px 12px rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(6px);
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+
+    }
+
+
+    .container-fluid {
+        margin-top: 20px;
+
+    }
+
+
+
+    .navbar-nav .nav-link {
+        color: white !important;
+    }
+
+
+
+    .footer .nav-link {
+        color: white !important;
+    }
+
+
+
+    #navbarMenu {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    #navbarMenu .nav-link {
+        position: relative;
+        padding: 0.5rem 1rem;
+        color: #fff;
+        font-weight: 600;
+        overflow: hidden;
+        border-radius: 50px;
+        transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        z-index: 1;
+    }
+
+
+    #navbarMenu .nav-link::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: conic-gradient(#0ff 0deg, #001 120deg, #0ff 240deg);
+        transform: scale(0);
+        opacity: 0;
+        transition: all 0.6s ease;
+        border-radius: 50px;
+        z-index: -1;
+    }
+
+
+    #navbarMenu .nav-link:hover {
+        border-radius: 10px;
+        transform: rotate(2deg);
+        color: #000;
+    }
+
+    #navbarMenu .nav-link:hover::before {
+        opacity: 0.5;
+        transform: scale(2);
+    }
+
+    .navbar .dropdown-menu {
+        background: transparent !important;
+        border: none;
+
+    }
+
+
+    .navbar .dropdown-menu .dropdown-item {
+        color: #fff !important;
+        background: transparent !important;
+        transition: color 0.3s ease;
+    }
+
+
+    .navbar .dropdown-menu .dropdown-item:hover {
+        color: #0ff !important;
+        background: transparent !important;
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%}Home{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nabla&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <header class="header">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm">
+            <div class="container">
+
+                <a class="navbar-brand d-flex align-items-center text-light" href="{% url 'home' %}">
+                    <img src="{{about_detail.logo.url}}" width="36" height="36" class="rounded-2" alt="empty">
+                    <strong class="p-2">Bishal Khanal</strong>
+                </a>
+
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+
+                    <ul class="navbar-nav mx-auto" id="navbarMenu">
+                        <li class="nav-item"><a class="nav-link fw-semibold" href="#About">About</a></li>
+                        <li class="nav-item"><a class="nav-link fw-semibold" href="#Skills">Skills</a></li>
+                        <li class="nav-item"><a class="nav-link fw-semibold" href="#Blog">Blog</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle fw-semibold" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Documents
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item " href="{% static 'resume.pdf' %}"
+                                        target="_blank">Resume</a>
+                                </li>
+                                <li><a class="dropdown-item" href="{% static 'cv.pdf' %}" target="_blank">CV</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link fw-semibold" href="#contact">Contact</a></li>
+
+                    </ul>
+
+
+                    <div class="d-flex ">
+                        <a href="{% url 'home' %}#projects" class="btn fw-semibold text-light">Projects</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </nav>
+
+    </header>
+
+    <main class="content">
+        {%block content%}
+
+
+        {%endblock%}
+
+    </main>
+    <section class=" text-white py-4  border-top border-bottom border-info">
+        <div class="container d-flex flex-wrap justify-content-between ">
+
+
+            <div id="About" "mb-4 me-5" style="max-width: 300px; text-align: justify;">
+                <h3><u>About me</u></h3>
+                <p class="mt-2 fw-semibold">Welcome to my portfolio!<br>
+                    {{about_detail.description|striptags}}
+                </p>
+            </div>
+
+
+            <div id="Contact" class="mb-4 me-5 border rounded border-light-subtle p-4" style="width: 400px;">
+                <h6 class="fw-bold text-center"><u>Feedback/Queries</u></h6>
+                <form method="POST" action="{% url 'contact' %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Your Email"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea class="form-control" id="message" name="message" rows="4"
+                            placeholder="Write your message..." required></textarea>
+                    </div>
+                    <div class="d-flex justify-content-center mt-3 ">
+                        <button type="submit" class="btn btn-info">Send Message</button>
+                    </div>
+
+                </form>
+            </div>
+
+
+
+
+            <div class="d-flex flex-wrap">
+                <div id="Skills" class="me-5 mb-4">
+                    <h6 class="fw-bold"><u>Skills</u></h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><a href="#" class="text-decoration-none text-white fw-semibold ">HTML,CSS</a>
+                        </li>
+                        <li class="mb-3"><a href="#" class="text-decoration-none text-white fw-semibold">Django,DRF</a>
+                        </li>
+                        <li class="mb-3"><a href="#" class="text-decoration-none text-white fw-semibold">Data
+                                Visualization</a>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <!-- <div class="me-5 mb-4">
+                    <h6 class="fw-bold text-dark"><u>Company</u></h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><a href="#" class="text-decoration-none text-dark fw-semibold">About</a></li>
+                        <li class="mb-3"><a href="#" class="text-decoration-none text-dark fw-semibold">Contact</a></li>
+                        <li class="mb-3"><a href="#" class="text-decoration-none text-dark fw-semibold"></a></li>
+                        <li class="mb-3"><a href="#" class="text-decoration-none text-dark fw-semibold"></a></li>
+                        <li class="mb-3"><a href="#" class="text-decoration-none text-dark fw-semibold"></a></li>
+                    </ul>
+                </div> -->
+
+
+                <div id="contact" class="mb-4">
+                    <h6 class="fw-bold"><u>Social Media</u></h6>
+                    <ul class="list-unstyled d-flex gap-3">
+                        <li>
+                            <a href="https://github.com/Bishal03-KH" target="_blank" class="text-light fs-4">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://instagram.com/yourusername" target="_blank" class="text-light fs-4">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://linkedin.com/in/bishalsr" target="_blank" class="text-light fs-4">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:xyzbishal@gmail.com" class="text-light fs-4">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+
+            </div>
+
+        </div>
+    </section>
+
+
+
+    <footer class="footer mt-1 py-0">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid d-flex justify-content-center">
+
+                <div class="text-white">
+                    &copy;2025 Bishal
+
+                </div>
+        </nav>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navLinks = document.querySelectorAll('#navbarMenu .nav-link');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function () {
+
+                    navLinks.forEach(l => l.classList.remove('active'));
+
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
