@@ -28,9 +28,9 @@ class Skill(models.Model):
     
 #Blog   
 class Blog(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255,blank=False)
     description =  CKEditor5Field('Text', config_name='extends')  
-    blog_image = models.ImageField(upload_to='blogs/',blank=True,null=True)
+    blog_image = models.ImageField(upload_to='blogs/',blank=False,null=False,default='default.jpg')
     published_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
